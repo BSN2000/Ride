@@ -1,0 +1,1280 @@
+{
+	"info": {
+		"_postman_id": "ad0f2ff0-e553-4f02-85b2-4687592df3d8",
+		"name": "Ride Hailing API - Comprehensive",
+		"description": "Complete API collection for the Ride Hailing System with all endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33416249"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('userId', jsonData.id);",
+									"} else if (jsonData.user && jsonData.user.id) {",
+									"    pm.collectionVariables.set('userId', jsonData.user.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/users/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Drivers",
+			"item": [
+				{
+					"name": "Register Driver",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('driverId', jsonData.id);",
+									"} else if (jsonData.driver && jsonData.driver.id) {",
+									"    pm.collectionVariables.set('driverId', jsonData.driver.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Alex Driver\",\n    \"phone\": \"1234567890\",\n    \"tier\": \"BASIC\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/drivers/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"drivers",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Premium Driver",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('driverId', jsonData.id);",
+									"} else if (jsonData.driver && jsonData.driver.id) {",
+									"    pm.collectionVariables.set('driverId', jsonData.driver.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Premium Driver\",\n    \"phone\": \"5555555555\",\n    \"tier\": \"PREMIUM\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/drivers/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"drivers",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Drivers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/drivers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Driver Location (Sets ONLINE)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"lat\": 12.9716,\n    \"lng\": 77.5946\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/drivers/{{driverId}}/location",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"drivers",
+								"{{driverId}}",
+								"location"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Driver Accept Ride",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.trip_id) {",
+									"    pm.collectionVariables.set('tripId', jsonData.trip_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ride_id\": \"{{rideId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/drivers/{{driverId}}/accept",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"drivers",
+								"{{driverId}}",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rides",
+			"item": [
+				{
+					"name": "Create Ride",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('rideId', jsonData.id);",
+									"}",
+									"if (jsonData.assigned_driver_id) {",
+									"    pm.collectionVariables.set('driverId', jsonData.assigned_driver_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{$guid}}",
+								"description": "Unique key for idempotent requests"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rider_id\": \"{{userId}}\",\n    \"pickup_lat\": 12.9716,\n    \"pickup_lng\": 77.5946,\n    \"destination_lat\": 12.2958,\n    \"destination_lng\": 76.6394,\n    \"tier\": \"BASIC\",\n    \"payment_method\": \"CASH\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ride (Fixed Coordinates)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('rideId', jsonData.id);",
+									"}",
+									"if (jsonData.assigned_driver_id) {",
+									"    pm.collectionVariables.set('driverId', jsonData.assigned_driver_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{$guid}}",
+								"description": "Unique key for idempotent requests"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rider_id\": \"{{userId}}\",\n    \"pickup_lat\": 12.9716,\n    \"pickup_lng\": 77.5946,\n    \"destination_lat\": 13.0827,\n    \"destination_lng\": 80.2707,\n    \"tier\": \"PREMIUM\",\n    \"payment_method\": \"CARD\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ride (With Surge)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('rideId', jsonData.id);",
+									"}",
+									"if (jsonData.assigned_driver_id) {",
+									"    pm.collectionVariables.set('driverId', jsonData.assigned_driver_id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{$guid}}",
+								"description": "Unique key for idempotent requests"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rider_id\": \"{{userId}}\",\n    \"pickup_lat\": 12.9716,\n    \"pickup_lng\": 77.5946,\n    \"destination_lat\": 12.2958,\n    \"destination_lng\": 76.6394,\n    \"tier\": \"BASIC\",\n    \"payment_method\": \"WALLET\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ride Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides/{{rideId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides",
+								"{{rideId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Rides",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Ride",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cancelled_by\": \"rider\",\n    \"reason\": \"Changed my mind\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides/{{rideId}}/cancel",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides",
+								"{{rideId}}",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trips",
+			"item": [
+				{
+					"name": "Get Trip",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/trips/{{tripId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"trips",
+								"{{tripId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pause Trip",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/trips/{{tripId}}/pause",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"trips",
+								"{{tripId}}",
+								"pause"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resume Trip",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/trips/{{tripId}}/resume",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"trips",
+								"{{tripId}}",
+								"resume"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "End Trip",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/trips/{{tripId}}/end",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"trips",
+								"{{tripId}}",
+								"end"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Process Payment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('paymentId', jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"trip_id\": \"{{tripId}}\",\n    \"amount\": 250.50\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/payments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/payments/{{paymentId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"payments",
+								"{{paymentId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Edge Cases",
+			"item": [
+				{
+					"name": "Create Ride - Missing Rider ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pickup_lat\": 12.9716,\n    \"pickup_lng\": 77.5946,\n    \"destination_lat\": 12.2958,\n    \"destination_lng\": 76.6394\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ride - Invalid Latitude",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rider_id\": \"test-user\",\n    \"pickup_lat\": 100.0,\n    \"pickup_lng\": 77.5946,\n    \"destination_lat\": 12.2958,\n    \"destination_lng\": 76.6394\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ride - Invalid Longitude",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rider_id\": \"test-user\",\n    \"pickup_lat\": 12.9716,\n    \"pickup_lng\": -200.0,\n    \"destination_lat\": 12.2958,\n    \"destination_lng\": 76.6394\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Location - Invalid Coordinates",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"lat\": 95.0,\n    \"lng\": 77.5946\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/drivers/test-driver/location",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"drivers",
+								"test-driver",
+								"location"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Non-existent Ride",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides/non-existent-ride-id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides",
+								"non-existent-ride-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Non-existent Trip",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/trips/non-existent-trip-id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"trips",
+								"non-existent-trip-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "End Non-existent Trip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/trips/non-existent-trip-id/end",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"trips",
+								"non-existent-trip-id",
+								"end"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Non-existent Payment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/payments/non-existent-payment-id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"payments",
+								"non-existent-payment-id"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Complete Flow",
+			"item": [
+				{
+					"name": "1. Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('userId', jsonData.id);",
+									"} else if (jsonData.user && jsonData.user.id) {",
+									"    pm.collectionVariables.set('userId', jsonData.user.id);",
+									"}",
+									"console.log('User ID set to: ' + pm.collectionVariables.get('userId'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Flow Test User\",\n    \"phone\": \"{{$randomPhoneNumber}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/users/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Register Driver",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('driverId', jsonData.id);",
+									"} else if (jsonData.driver && jsonData.driver.id) {",
+									"    pm.collectionVariables.set('driverId', jsonData.driver.id);",
+									"}",
+									"console.log('Driver ID set to: ' + pm.collectionVariables.get('driverId'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Flow Test Driver\",\n    \"phone\": \"{{$randomPhoneNumber}}\",\n    \"tier\": \"BASIC\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/drivers/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"drivers",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Update Driver Location",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"lat\": 12.9716,\n    \"lng\": 77.5946\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/drivers/{{driverId}}/location",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"drivers",
+								"{{driverId}}",
+								"location"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Create Ride",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('rideId', jsonData.id);",
+									"}",
+									"if (jsonData.assigned_driver_id) {",
+									"    pm.collectionVariables.set('driverId', jsonData.assigned_driver_id);",
+									"}",
+									"console.log('Ride ID set to: ' + pm.collectionVariables.get('rideId'));",
+									"console.log('Driver ID set to: ' + pm.collectionVariables.get('driverId'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rider_id\": \"{{userId}}\",\n    \"pickup_lat\": 12.9716,\n    \"pickup_lng\": 77.5946,\n    \"destination_lat\": 12.2958,\n    \"destination_lng\": 76.6394,\n    \"tier\": \"BASIC\",\n    \"payment_method\": \"CARD\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Get Ride Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/rides/{{rideId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"rides",
+								"{{rideId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Driver Accept Ride",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.trip_id) {",
+									"    pm.collectionVariables.set('tripId', jsonData.trip_id);",
+									"}",
+									"console.log('Trip ID set to: ' + pm.collectionVariables.get('tripId'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ride_id\": \"{{rideId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/drivers/{{driverId}}/accept",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"drivers",
+								"{{driverId}}",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. Get Trip Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/trips/{{tripId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"trips",
+								"{{tripId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8. Pause Trip",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/trips/{{tripId}}/pause",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"trips",
+								"{{tripId}}",
+								"pause"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9. Resume Trip",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/trips/{{tripId}}/resume",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"trips",
+								"{{tripId}}",
+								"resume"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10. End Trip",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/trips/{{tripId}}/end",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"trips",
+								"{{tripId}}",
+								"end"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11. Process Payment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.id) {",
+									"    pm.collectionVariables.set('paymentId', jsonData.id);",
+									"}",
+									"console.log('Payment ID set to: ' + pm.collectionVariables.get('paymentId'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"trip_id\": \"{{tripId}}\",\n    \"amount\": 250.50\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/payments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12. Verify Driver Status (ONLINE)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/drivers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "driverId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "rideId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "tripId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "paymentId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
