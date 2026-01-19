@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideX - Ride Hailing System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="nav-bar">
+            <div class="logo">🚖 RideX</div>
+            <div class="nav-buttons">
+                <!-- <button class="nav-btn" data-portal="user">👤 User Portal</button> -->
+                <!-- <button class="nav-btn" data-portal="driver">🚗 Driver Portal</button> -->
+                <button class="nav-btn active" data-portal="monitor">📊 Monitoring</button>
+            </div>
+        </nav>
+
+        <!-- DRIVER PORTAL -->
+        <!--
+        <div id="driver-portal" class="portal">
+            <div class="portal-header driver">
+                <h1>Driver Dashboard</h1>
+                <p>Manage rides and earnings</p>
+            </div>
+
+            <div class="card">
+                <h2>🚗 Register / Login as Driver</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="driverName" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" id="driverPhone" placeholder="Phone number">
+                    </div>
+                    <div class="form-group">
+                        <label>Tier</label>
+                        <select id="driverTier">
+                            <option value="BASIC">Basic</option>
+                            <option value="PREMIUM">Premium</option>
+                        </select>
+                    </div>
+                    <button id="registerDriverBtn" class="btn-primary">Register / Login</button>
+                </div>
+                <div id="driverStatusMsg" class="status-msg" style="display: none;"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>🚗 All Drivers</h2>
+                    <div class="header-actions">
+                        <span id="liveIndicator" class="live-indicator">🔴 Live</span>
+                        <button id="refreshDriversBtn" class="btn-secondary btn-small">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div id="driversGrid" class="drivers-grid">
+                    <p class="empty-state">No drivers registered yet</p>
+                </div>
+            </div>
+        </div>
+        -->
+
+        <!-- MONITORING PORTAL -->
+        <div id="monitor-portal" class="portal active">
+            <div class="portal-header monitor">
+                <h1>System Monitoring</h1>
+                <p>Real-time system overview</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalRides">0</div>
+                    <div class="stat-label">Total Rides</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="onlineDrivers">0</div>
+                    <div class="stat-label">Online Drivers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="activeTrips">0</div>
+                    <div class="stat-label">Active Rides</div>
+                </div>
+            </div>
+
+            <div class="live-indicator" style="margin-bottom: 16px;">
+                <span class="live-dot"></span>
+                <span>Live Monitoring - Auto-refreshing every 3 seconds</span>
+            </div>
+
+            <button id="refreshDataBtn" class="btn-secondary" style="margin-bottom: 16px;">🔄 Manual Refresh</button>
+
+            <!-- Users Table -->
+            <div class="card table-card">
+                <h2>👥 Registered Users</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <tr><td colspan="3" class="empty">No users registered</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Drivers Table -->
+            <div class="card table-card">
+                <h2>🚗 Registered Drivers</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Driver ID</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Tier</th>
+                            <th>Amount Earned</th>
+                        </tr>
+                    </thead>
+                    <tbody id="driversTableBody">
+                        <tr><td colspan="5" class="empty">No drivers registered</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Rides Table -->
+            <div class="card table-card">
+                <h2>🛣️ All Rides</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Ride ID</th>
+                            <th>Rider</th>
+                            <th>Driver</th>
+                            <th>Status</th>
+                            <th>Payment</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ridesTableBody">
+                        <tr><td colspan="5" class="empty">No rides yet</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Activity Log -->
+            <div class="card">
+                <h2>📋 Activity Log</h2>
+                <div id="activityLog" class="activity-log"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
